@@ -85,8 +85,7 @@ def main():
 	predicted_probs = clf.predict(newtestset)
 	savetxt('output.csv', predicted_probs, delimiter=',', fmt='%f')
 
-	# save the classifier
-	joblib.dump(clf, 'gold.pkl')
+
 
 if __name__=="__main__":
     main()
