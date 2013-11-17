@@ -5,8 +5,8 @@ import dateutil.parser
 
 def main():
     #create the training & test sets, skipping the header row with [1:]
-    dataset = genfromtxt(open('sampledataset.csv','r'), dtype=None, delimiter=',')[1:] 
-    newdataset = numpy.zeros(dataset.shape[0]*(dataset.shape[1]+2)).reshape(dataset.shape[0],dataset.shape[1]+2)
+    dataset = genfromtxt(open('datasetinter.csv','r'), dtype=None, delimiter=',', usecols=(0,1,2,3,4,5,6,7)) 
+    newdataset = numpy.zeros(dataset.shape[0]*7).reshape(dataset.shape[0],7)
     index = 0
     for date in dataset:
     	dateutil.parser.parse(date[0])
