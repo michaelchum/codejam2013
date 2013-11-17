@@ -11,7 +11,7 @@ import scipy as sp
 #from sklearn import linear_model
 #from sklearn import svm
 from sklearn import tree
-from sklearn.externals import joblib
+import cPickle
 
 def main():
     #create the training & test sets, skipping the header row with [1:]
@@ -71,21 +71,21 @@ def main():
 	#clf = linear_model.Ridge (alpha = 0.5)
 	#clf = svm.LinearSVC()
 	clf = tree.DecisionTreeRegressor()
+	#clf = svm.SVR()
 	#clf = linear_model.RidgeCV(alphas=[0.1, 1.0, 10])
 	#clf = linear_model.LinearRegression()
 
 	clf.fit(train, target)
-	#clf.coef_ 
 	#print clf.coef_
-
-	#clf = svm.SVR()
-	#clf.fit(train, target)
+	#print interpreter_
 
 	#predicted_probs = [[x[4]] for index, x in enumerate(clf.predict(test))]
 	predicted_probs = clf.predict(newtestset)
 	savetxt('output.csv', predicted_probs, delimiter=',', fmt='%f')
 
-
+	# save the classifier
+    with open('my_dumped_classifier.pkl', 'wb') as fid:
+        cPickle.dump(clf, fid) 
 
 if __name__=="__main__":
     main()
